@@ -1,20 +1,29 @@
 package com.supercoderz.fxj.cucumber;
 
+import com.supercoderz.fxj.FXJ;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class Steps {
-    @Given("An instance of FX provider")
-    public void an_instance_of_FX_provider() {
+
+    private FXJ fxj;
+    private Double rate;
+    private Double[] rates;
+
+    @Given("An instance of FXJ")
+    public void an_instance_of_FXJ() {
+        this.fxj = FXJ.instance();
     }
 
     @When("Requested for {}")
     public void requested_for(String pair) {
+        this.rate = fxj.get(pair);
     }
 
     @Then("A value is returned")
     public void a_value_is_returned() {
+        assert this.rate != null;
     }
 
     @Then("A list of rates is returned")

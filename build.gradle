@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.testng:testng:6.8'
     testImplementation 'io.cucumber:cucumber-java:4.3.1'
 }
 
