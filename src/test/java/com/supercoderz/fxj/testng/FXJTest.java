@@ -15,6 +15,38 @@ public class FXJTest {
 
     @Test
     public void testGet() {
-        assertNotNull(FXJ.instance().get("USDJPY"));
+        FXRate rate = FXJ.instance().get("USDJPY");
+        assertNotNull(rate.value);
     }
+
+    @Test
+    public void testGetDate(){
+        FXRate rate = FXJ.instance().get("USDJPY","20190101");
+        assertNotNull(rate);
+        assertNotNull(rate.date.orElse(null));
+        assertNotNull(rate.value);
+    }
+
+    @Test
+    public void testGetDateFuture(){
+        FXRate rate = FXJ.instance().get("USDJPY","20190101");
+        assertNotNull(rate);
+        assertNotNull(rate.date.orElse(null));
+        assertEquals(rate.value,Double.NaN);
+    }
+
+    @Test
+    public void testGetDaily(){
+        FXRate[] result = FXJ.instance().dailyRates();
+        assertNotNull(result);
+        assertTrue(result.length > 1)
+    }
+
+    @Test
+    public void testGetHistorical(){
+        FXRate[] result = FXJ.instance().historicalRates();
+        assertNotNull(result);
+        assertTrue(result.length > 1)
+    }
+
 }

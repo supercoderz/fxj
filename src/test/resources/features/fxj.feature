@@ -15,17 +15,23 @@ Feature: Download FX rates
     When Requested for all daily rates
     Then A list of rates is returned
 
-  Scenario: Rates for a historical date
+  Scenario: All the historical rates
+    Given An instance of FXJ
+    When Requested for all historical rates
+    Then A list of rates is returned
+
+  Scenario: Rates for the a date
     Given An instance of FXJ
     When Requested for rates for a date
-    Then A list of rates is returned along with the date
-
-  Scenario: Rates for the current date
-    Given An instance of FXJ
-    When Requested for rates for today
     Then A list of rates is returned
+
+  Scenario: Get rates for current date when no date is given
+    Given An instance of FXJ
+    When Requested for rates for an empty date
+    Then A list of rates is returned
+    And It is same as the list of daily rates
 
   Scenario:  Rates for future date
     Given An instance of FXJ
-    When Requested for rates in future
-    Then An empty list is returned
+    When Requested for rates for a date in future
+    Then A NaN rate is returned

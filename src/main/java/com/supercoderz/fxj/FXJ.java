@@ -13,7 +13,7 @@ public class FXJ {
         return fxj;
     }
 
-    public Double get(String pair) {
+    public Double get(String pair,Optional<Date> date) {
         return 70.78;
     }
 }
